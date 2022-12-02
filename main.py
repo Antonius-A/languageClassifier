@@ -82,9 +82,6 @@ def if_english(words=None, threshold=0.8):
 
 
 
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # create_dictionary()
     load_dictionary()
@@ -93,4 +90,3 @@ if __name__ == '__main__':
     sentence = ["hello", "there", "anthony", "my", "name", "is", "roger", "bonjour"]
     print(if_english(sentence)) #returns True with an english score of 87.5%
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
