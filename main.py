@@ -62,25 +62,37 @@ def check_english(word, print_statements=False):
 
 #this function accepts a list of words or sentence string and returns a boolean value based on a threshold (with a default % of 80% english words in list)
 def if_english(words=None, threshold=0.8):
-    start_time = time.time()
+    # start_time = time.time()
     def convert_list_to_percentage(word_list):
 
         answers = []
         for word in word_list:
             answers.append(check_english(word))
-        #print(sum(answers)/len(answers))
-        return sum(answers)/len(answers) > threshold
+        # print(sum(answers)/len(answers))
+
+        updated_word_list = remove_foreigners(word_list, answers)
+        percentage = sum(answers)/len(answers)
+
+        return percentage > threshold, percentage, updated_word_list
 
     if words is None:
         return "invalid parameters, enter a string or list or words"
     if isinstance(words, str):
         words = words.split(" ")
     if isinstance(words, list):
-        result =  convert_list_to_percentage(words)
-        print("---Query Completed in %s seconds ---" % "{0:.7f}".format(time.time() - start_time))
-        return
+        return convert_list_to_percentage(words)
+
     else:
         return "invalid parameters, enter a string or list or words"
+
+def remove_foreigners(word_list, boul_list):
+    if len(word_list) != len(boul_list):
+        return "invalid inputs, both lists must be of equal length."
+    for i, b in reversed(list(enumerate(boul_list))):
+    #     print(i)
+        if boul_list[i] == False:
+            del word_list[i]
+    return word_list
 
 
 
@@ -89,6 +101,11 @@ if __name__ == '__main__':
     load_dictionary()
     # check_english('hola')
 
+    start_time = time.time()
+
     sentence = ["hello", "there", "anthony", "my", "name", "is", "roger", "bonjour"]
+    print(sentence)
     print(if_english(sentence)) #returns True with an english score of 87.5%
+
+    print("---Query Completed in %s seconds ---" % "{0:.7f}".format(time.time() - start_time))
 
