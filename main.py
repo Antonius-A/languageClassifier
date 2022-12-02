@@ -62,7 +62,7 @@ def check_english(word, print_statements=False):
 
 #this function accepts a list of words or sentence string and returns a boolean value based on a threshold (with a default % of 80% english words in list)
 def if_english(words=None, threshold=0.8):
-
+    start_time = time.time()
     def convert_list_to_percentage(word_list):
 
         answers = []
@@ -76,7 +76,9 @@ def if_english(words=None, threshold=0.8):
     if isinstance(words, str):
         words = words.split(" ")
     if isinstance(words, list):
-        return convert_list_to_percentage(words)
+        result =  convert_list_to_percentage(words)
+        print("---Query Completed in %s seconds ---" % "{0:.7f}".format(time.time() - start_time))
+        return
     else:
         return "invalid parameters, enter a string or list or words"
 
