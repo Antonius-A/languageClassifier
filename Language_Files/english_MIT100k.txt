@@ -456,6 +456,7 @@ appearing
 appears
 appendix
 apple
+apples
 appliance
 appliances
 applicable
